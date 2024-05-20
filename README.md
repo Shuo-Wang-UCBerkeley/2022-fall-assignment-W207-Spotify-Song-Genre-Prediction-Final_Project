@@ -12,7 +12,7 @@ December 2022
   - [EDA](#EDA)
   - [Feature Engineering](#Feature-Engineering)
   - [Models](#Models)
-  - [Results & Discussion](#Results-Discussion)
+  - [Results and Discussion](#Results-and-Discussion)
   - [Helpful Information](#helpful-information)
     - [Environment](#environment)
 
@@ -56,7 +56,7 @@ https://docs.google.com/document/d/1LWl88F8wGY1WkkOSzzVzwSYij1yeMR8hFXllRpkMyrI/
 - K-Nearest Neighbors
 - Logistic Regres
 
-## Results & Discussion
+## Results and Discussion
 - Feature scaling and balancing data is crucial for some models
 - The benefits of different feature engineering techniques will vary from model to model
 - Establishing a baseline gave us better appreciation for our model, even though the accuracy wasn’t objectively high
