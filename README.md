@@ -9,74 +9,63 @@ December 2022
 - [Final Project: Spotify Song Genre Prediction](#final-project-Spotify-Song-Genre-Prediction)
   - [Project Overview](#project-overview)
   - [Dataset](#dataset)
-  - [EDA and Feature Engineering](#EDA-and-Feature-Engineering)
-  - [Modeling Approach and Aspects](#Modeling-Approach-and-Aspects)
-    - [Model Pipeline](#model-pipeline)
-    - [Cross-Fold Validation](#Cross-Fold-Validation)
-    - [Preprocess Stage](#Preprocess-Stage)
-    - [Evaluation Metrics](#Evaluation-Metrics)
+  - [EDA](#EDA)
+  - [Feature Engineering](#Feature-Engineering)
+  - [Models](#Models)
   - [Results & Discussion](#Results-Discussion)
-    - [Experiments](#Experiments)
-    - [Model Performance](#Model-Performance)
-    - [Feature Importance](#Feature-Importance)
-  - [Future Work](#future-work)
   - [Helpful Information](#helpful-information)
     - [Environment](#environment)
 
 ## Project Overview
-
-Problem: US Flight delays ⇒ affecting consumers nationwide and impacting operational costs for airline and airports
-
-Objective: Develop a predictive model that can anticipate flight delays (>15 mins).
+This project is to build machine learning learning models to have the music app automatically recognize a song’s genre when a song is added to its database, rather than manually classifying a song genre. 
 
 ## Dataset
-There are four datasets used for this project. 
-- (1) The first dataset (**Flights Data**) is for flights originating and landing from/to US Domestic airports from 2015 to 2021. 
-- (2) The second dataset (**Weather Data**) is for weather information from 2015 to 2021. 
-- (3) The third dataset (**Station Data**) is for the weather stations, which contains location and proximity information to help identify the closest weather station to any airport in the first dataset. 
-- (4) The fourth dataset (**Airport Code Data**) is for IATA airport code, a three-letter code that is used in passenger reservation, ticketing, and baggage-handling systems. 
+Kaggle link: https://www.kaggle.com/datasets/mrmorj/dataset-of-songs-in-spotify
 
-There are joined tables (OTPW) using data from all previously mentioned data tables (Airline, weather, sation & AITA). OTPW tables for different time periods are also provided. These consist of 3m, 6m, 1yr and the complete dataset (2015-2019). The total size of the three month OTPW dataset is 1,500,620,247 bytes, with 1,401,363 rows and 216 columns. The total size of the 2015-2019 OTPW dataset is 6,525,616,408 bytes, with 31,673,119 rows and 214 columns.
+Dimension: 42,305 rows x 22 columns
 
-Data dictionary: https://www.transtats.bts.gov/Fields.asp?gnoyr_VQ=FGJ
-## EDA and Feature Engineering
-![alt text](https://github.com/Shuo-Wang-UCBerkeley/2023-summer-assignment-W261-Flight-Delay-Prediction-Final_Project/blob/main/Images/EDA-Feature_Engineering.png)
+Features: 
+‘danceability', 'energy', 'key', 'loudness', 'mode', 'speechiness', 'acousticness', 'instrumentalness', 'liveness', 'valence', 'tempo', 'type', 'id', 'uri', 'track_href', 'analysis_url', 'duration_ms', 'time_signature', 'genre', 'song_name', 'Unnamed: 0', 'title'
 
-## Modeling Approach and Aspects
-### Model Pipeline
-![alt text](https://github.com/Shuo-Wang-UCBerkeley/2023-summer-assignment-W261-Flight-Delay-Prediction-Final_Project/blob/main/Images/Model-Pipeline.png)
+Data dictionary:
+https://developer.spotify.com/documentation/web-api/reference/#/operations/get-audio-features
 
-### Cross-Fold Validation
-![alt text](https://github.com/Shuo-Wang-UCBerkeley/2023-summer-assignment-W261-Flight-Delay-Prediction-Final_Project/blob/main/Images/Cross-Fold-Validation.png)
+https://docs.google.com/document/d/1LWl88F8wGY1WkkOSzzVzwSYij1yeMR8hFXllRpkMyrI/edit
 
-### Preprocess Stage
-![alt text](https://github.com/Shuo-Wang-UCBerkeley/2023-summer-assignment-W261-Flight-Delay-Prediction-Final_Project/blob/main/Images/Preprocess-Stage.png)
+## EDA 
+- Underground rap was the most popular genre
+- Imbalance in the records per genre
+- Some numeric features are on different scales
+- Some fields has high levels of missing data
+- Some rows are duplicated
+- Some tracks are mapped to more than one genre
 
-### Evaluation Metrics
-- F2 - F Beta Score (Beta = 2.0)
-    - Weighted F2
-    - F2 - Label 1 (yes delay)
-    - F2 - Label 0 (no  delay)
-- F1 Score
-- Accuracy
-- Precision 
-- Recall
-- ROC-AUC
+![alt text](https://github.com/Shuo-Wang-UCBerkeley/2022-fall-assignment-W207-Spotify-Song-Genre-Prediction-Final_Project/blob/main/Images/EDA.png)
+
+![alt text](https://github.com/Shuo-Wang-UCBerkeley/2022-fall-assignment-W207-Spotify-Song-Genre-Prediction-Final_Project/blob/main/Images/Addressing_Imbalanced_Data.png)
+
+## Feature Engineering
+![alt text](https://github.com/Shuo-Wang-UCBerkeley/2022-fall-assignment-W207-Spotify-Song-Genre-Prediction-Final_Project/blob/main/Images/Feature_Engineering.png)
+
+## Models
+- Baseline Models: **ALWAYS** predict the most most popular genre from the raw data (Underground Rap)
+- Random Forest
+- XGBoost
+- Neural Networks
+- K-Means
+- K-Nearest Neighbors
+- Logistic Regres
 
 ## Results & Discussion
-### Experiments
-![alt text](https://github.com/Shuo-Wang-UCBerkeley/2023-summer-assignment-W261-Flight-Delay-Prediction-Final_Project/blob/main/Images/Experiments.png)
-### Model Performance
-![alt text](https://github.com/Shuo-Wang-UCBerkeley/2023-summer-assignment-W261-Flight-Delay-Prediction-Final_Project/blob/main/Images/Model-Performance.png)
-### Feature Importance
-![alt text](https://github.com/Shuo-Wang-UCBerkeley/2023-summer-assignment-W261-Flight-Delay-Prediction-Final_Project/blob/main/Images/Feature-Importance.png)
+- Feature scaling and balancing data is crucial for some models
+- The benefits of different feature engineering techniques will vary from model to model
+- Establishing a baseline gave us better appreciation for our model, even though the accuracy wasn’t objectively high
+- More investigation into balancing techniques could be helpful
 
-## Future Work
-1. Execution time  
-2. Neural Network Implement
+![alt text](https://github.com/Shuo-Wang-UCBerkeley/2022-fall-assignment-W207-Spotify-Song-Genre-Prediction-Final_Project/blob/main/Images/Results.png)
 
 ## Helpful Information
 ### Environment
-Databrick Notebook
+Google Colaboratory
 
-[Back-To-Top](#final-project-flight-delay-prediction)
+[Back-To-Top](#final-project-Spotify-Song-Genre-Prediction)
